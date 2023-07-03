@@ -1,0 +1,34 @@
+#CRIAÇÃO DA BASE DE DADOS
+
+CREATE DATABASE biblioteca;
+
+USE biblioteca; 
+
+#CRIAÇÃO DAS TABELAS
+
+CREATE TABLE `clientes` (
+   `idclientes` int NOT NULL AUTO_INCREMENT,
+   `nome` varchar(45) NOT NULL,
+   `cpf` varchar(11) NOT NULL,
+   PRIMARY KEY (`idclientes`,`cpf`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `livros` (
+   `idlivros` int NOT NULL AUTO_INCREMENT,
+   `nome` varchar(45) NOT NULL,
+   `quantidade` int DEFAULT NULL,
+   `genero` varchar(30) DEFAULT NULL,
+   PRIMARY KEY (`idlivros`,`nome`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `cliente_aluga_livro` (
+   `id` int NOT NULL AUTO_INCREMENT,
+   `prazo` date DEFAULT NULL,
+   `idclientes` int DEFAULT NULL,
+   `idlivros` int DEFAULT NULL,
+   PRIMARY KEY (`id`),
+   KEY `idclientes` (`idclientes`),
+   KEY `idlivros` (`idlivros`),
+   CONSTRAINT `cliente_aluga_livro_ibfk_1` FOREIGN KEY (`idclientes`) REFERENCES `clientes` (`idclientes`),
+   CONSTRAINT `cliente_aluga_livro_ibfk_2` FOREIGN KEY (`idlivros`) REFERENCES `livros` (`idlivros`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
